@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Executive operating dashboard concept for the Tokyo Pet Platform.">
+  <meta name="theme-color" content="#102a43">
+  <title>Tokyo Pet Platform — Executive Command</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#overview" aria-label="Tokyo Pet Platform home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M9.5 14.2c-2 0-3.6-2-3.6-4.3S7.2 6 9 6c1.9 0 3.4 1.8 3.4 4.1 0 2.4-1.1 4.1-2.9 4.1Zm13 0c-1.8 0-2.9-1.7-2.9-4.1 0-2.3 1.5-4.1 3.4-4.1 1.8 0 3.1 1.6 3.1 3.9s-1.6 4.3-3.6 4.3ZM5.2 21c-1.8 0-3.2-1.6-3.2-3.7s1.2-3.6 2.9-3.6c1.9 0 3.3 1.7 3.3 3.8S6.9 21 5.2 21Zm21.6 0c-1.7 0-3-1.4-3-3.5s1.4-3.8 3.3-3.8c1.7 0 2.9 1.5 2.9 3.6S28.6 21 26.8 21ZM16 13.2c4 0 8.2 5.3 8.2 9.1 0 2.8-2 4.3-4.5 3.4-2.3-.9-5.1-.9-7.4 0-2.5.9-4.5-.6-4.5-3.4 0-3.8 4.2-9.1 8.2-9.1Z"/></svg>
+        </span>
+        <span><strong>Tokyo Pet</strong><small>Platform intelligence</small></span>
+      </a>
+
+      <nav class="main-nav" aria-label="Dashboard sections">
+        <a class="nav-item active" href="#overview" data-section="overview"><span class="nav-icon">⌂</span>Overview</a>
+        <a class="nav-item" href="#journey" data-section="journey"><span class="nav-icon">◫</span>Journey</a>
+        <a class="nav-item" href="#channels" data-section="channels"><span class="nav-icon">◉</span>Channels</a>
+        <a class="nav-item" href="#supply" data-section="supply"><span class="nav-icon">◇</span>Supply &amp; demand</a>
+        <a class="nav-item" href="#quality" data-section="quality"><span class="nav-icon">✓</span>Quality gates</a>
+      </nav>
+
+      <div class="sidebar-card">
+        <span class="eyebrow">MVP READINESS</span>
+        <div class="readiness-row"><strong>76%</strong><span>4 of 6 gates</span></div>
+        <div class="progress"><span style="width:76%"></span></div>
+        <button class="text-button" id="open-readiness">View delivery plan</button>
+      </div>
+
+      <div class="profile">
+        <span class="avatar">KY</span>
+        <span><strong>Executive view</strong><small>Tokyo pilot</small></span>
+        <button class="icon-button" id="theme-toggle" aria-label="Toggle colour theme" title="Toggle colour theme">◐</button>
+      </div>
+    </aside>
+
+    <div class="main-wrap">
+      <header class="topbar">
+        <button class="menu-button" id="menu-button" aria-label="Open navigation" aria-expanded="false">☰</button>
+        <div class="topbar-context">
+          <span class="live-dot"></span>
+          <span>Tokyo pilot</span>
+          <span class="divider"></span>
+          <span>Updated moments ago</span>
+        </div>
+        <div class="topbar-actions">
+          <div class="range-control" role="group" aria-label="Reporting period">
+            <button data-range="30">30d</button>
+            <button class="active" data-range="90">90d</button>
+            <button data-range="365">12m</button>
+          </div>
+          <button class="secondary-button" id="export-button">Export brief</button>
+          <button class="primary-button" id="board-mode">Present to board</button>
+        </div>
+      </header>
+
+      <main id="overview">
+        <section class="hero-row">
+          <div>
+            <span class="eyebrow accent">EXECUTIVE COMMAND</span>
+            <h1>One view of growth, care and control.</h1>
+            <p>From first enquiry to a healthy placement — with every commercial and welfare signal connected.</p>
+          </div>
+          <div class="demo-badge"><span>i</span><div><strong>Illustrative demo data</strong><small>For business concept validation</small></div></div>
+        </section>
+
+        <section class="kpi-grid" aria-label="Key performance indicators">
+          <article class="kpi-card" data-kpi="demand">
+            <div class="kpi-top"><span class="kpi-icon teal">◎</span><span class="trend positive">+18.4%</span></div>
+            <span class="kpi-label">Qualified demand</span>
+            <strong class="kpi-value" data-value="284">284</strong>
+            <span class="kpi-note">Households ready for consultation</span>
+            <div class="mini-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+          <article class="kpi-card" data-kpi="placements">
+            <div class="kpi-top"><span class="kpi-icon blue">✓</span><span class="trend positive">+9.3%</span></div>
+            <span class="kpi-label">Successful placements</span>
+            <strong class="kpi-value" data-value="47">47</strong>
+            <span class="kpi-note">Handover completed and linked</span>
+            <div class="mini-bars blue-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+          <article class="kpi-card" data-kpi="speed">
+            <div class="kpi-top"><span class="kpi-icon amber">◷</span><span class="trend positive">−2.1d</span></div>
+            <span class="kpi-label">Median time to placement</span>
+            <strong class="kpi-value" data-value="12.4" data-suffix=" days">12.4<span> days</span></strong>
+            <span class="kpi-note">From available to handover</span>
+            <div class="mini-bars amber-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+          <article class="kpi-card" data-kpi="traceability">
+            <div class="kpi-top"><span class="kpi-icon purple">⌁</span><span class="trend positive">+1.8%</span></div>
+            <span class="kpi-label">Journey traceability</span>
+            <strong class="kpi-value" data-value="97.2" data-suffix="%">97.2<span>%</span></strong>
+            <span class="kpi-note">Records with known source and outcome</span>
+            <div class="mini-bars purple-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+        </section>
+
+        <section class="dashboard-grid">
+          <article class="panel performance-panel" id="journey">
+            <div class="panel-heading">
+              <div><span class="eyebrow">OPERATING PERFORMANCE</span><h2>Demand to placement</h2><p>Weekly flow across the connected journey</p></div>
+              <div class="legend"><span><i class="teal-line"></i>Qualified demand</span><span><i class="navy-line"></i>Placements</span></div>
+            </div>
+            <div class="chart-wrap" id="performance-chart">
+              <svg viewBox="0 0 720 280" role="img" aria-label="Demand and placement trend chart">
+                <g class="grid-lines"><line x1="55" y1="30" x2="700" y2="30"/><line x1="55" y1="90" x2="700" y2="90"/><line x1="55" y1="150" x2="700" y2="150"/><line x1="55" y1="210" x2="700" y2="210"/></g>
+                <g class="axis-labels"><text x="18" y="35">80</text><text x="18" y="95">60</text><text x="18" y="155">40</text><text x="18" y="215">20</text></g>
+                <path class="area-path" id="demand-area"/>
+                <path class="line-path demand-line" id="demand-line"/>
+                <path class="line-path placement-line" id="placement-line"/>
+                <g id="chart-points"></g>
+                <g class="x-labels" id="x-labels"></g>
+              </svg>
+              <div class="chart-tooltip" id="chart-tooltip"></div>
+            </div>
+            <div class="chart-summary">
+              <div><span>Consultation conversion</span><strong>42.6%</strong><small>+4.2 pts</small></div>
+              <div><span>Placement conversion</span><strong>16.5%</strong><small>+1.6 pts</small></div>
+              <div><span>Post-handover response</span><strong>88.1%</strong><small>+6.4 pts</small></div>
+            </div>
+          </article>
+
+          <article class="panel pulse-panel">
+            <div class="panel-heading compact"><div><span class="eyebrow">LIVE OPERATING PULSE</span><h2>What needs attention</h2></div><button class="icon-button" aria-label="More options">•••</button></div>
+            <div class="health-score">
+              <div class="score-ring" style="--score:86"><span><strong>86</strong><small>/ 100</small></span></div>
+              <div><strong>Healthy momentum</strong><p>Growth and data quality are improving. Two operational signals need review.</p></div>
+            </div>
+            <div class="signal-list">
+              <button class="signal" data-toast="8 overdue follow-ups opened in the action queue."><span class="signal-icon warn">!</span><span><strong>8 follow-ups overdue</strong><small>Day-14 customer check-ins</small></span><em>Review</em></button>
+              <button class="signal" data-toast="Demand for small dogs is 1.7× current availability."><span class="signal-icon hot">↗</span><span><strong>Small-dog demand rising</strong><small>1.7× available supply</small></span><em>Explore</em></button>
+              <button class="signal" data-toast="All serious incident indicators are currently clear."><span class="signal-icon good">✓</span><span><strong>No serious incidents</strong><small>90-day rolling window</small></span><em>Clear</em></button>
+            </div>
+          </article>
+        </section>
+
+        <section class="dashboard-grid lower-grid">
+          <article class="panel channel-panel" id="channels">
+            <div class="panel-heading">
+              <div><span class="eyebrow">CHANNEL ECONOMICS</span><h2>Where qualified demand comes from</h2><p>Quality and contribution, not clicks alone</p></div>
+              <select id="channel-metric" aria-label="Channel performance metric"><option value="qualified">Qualified enquiries</option><option value="conversion">Placement conversion</option><option value="cost">Cost per qualified lead</option></select>
+            </div>
+            <div class="channel-chart" id="channel-chart"></div>
+            <div class="channel-foot"><span><i class="status-dot"></i>Search + Maps leads on intent</span><strong>38% of qualified demand</strong></div>
+          </article>
+
+          <article class="panel supply-panel" id="supply">
+            <div class="panel-heading compact"><div><span class="eyebrow">SUPPLY &amp; DEMAND</span><h2>Match readiness</h2></div><button class="text-button" data-toast="Supply and demand detail is ready for review.">View all</button></div>
+            <div class="match-overview">
+              <div class="donut" style="--value:68"><span><strong>68%</strong><small>match ready</small></span></div>
+              <div class="match-stats"><div><span>Available animals</span><strong>38</strong></div><div><span>Active households</span><strong>91</strong></div><div><span>Matches in review</span><strong>24</strong></div></div>
+            </div>
+            <div class="demand-gap">
+              <div><span>Small dogs</span><div class="dual-bar"><i style="width:88%"></i><b style="width:51%"></b></div><em>High gap</em></div>
+              <div><span>Cats</span><div class="dual-bar"><i style="width:67%"></i><b style="width:59%"></b></div><em>Balanced</em></div>
+              <div><span>Medium dogs</span><div class="dual-bar"><i style="width:44%"></i><b style="width:72%"></b></div><em>Supply-led</em></div>
+            </div>
+          </article>
+
+          <article class="panel quality-panel" id="quality">
+            <div class="panel-heading compact"><div><span class="eyebrow">CONTROL LAYER</span><h2>MVP quality gates</h2></div><span class="pill">4 / 6 passing</span></div>
+            <div class="gate-list">
+              <div class="gate"><span>Known acquisition source</span><strong>97.2%</strong><i class="pass">Pass</i></div>
+              <div class="gate"><span>Required animal fields</span><strong>96.4%</strong><i class="pass">Pass</i></div>
+              <div class="gate"><span>Handover relationship</span><strong>100%</strong><i class="pass">Pass</i></div>
+              <div class="gate"><span>Consent enforcement</span><strong>100%</strong><i class="pass">Pass</i></div>
+              <div class="gate"><span>Restore exercise</span><strong>Scheduled</strong><i class="wait">Pending</i></div>
+              <div class="gate"><span>Duplicate records</span><strong>1.3%</strong><i class="risk">Review</i></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="decision-strip">
+          <div><span class="eyebrow">THE DECISION LAYER</span><h2>Every signal becomes a clear next move.</h2></div>
+          <div class="decision-flow"><span>Evidence</span><i></i><span>Insight</span><i></i><span>Decision</span><i></i><span>Measured outcome</span></div>
+          <button class="primary-button light" id="board-mode-bottom">Open board story</button>
+        </section>
+      </main>
+      <footer><span>Tokyo Pet Platform · Executive dashboard concept</span><span>Responsible placement · measurable growth · operational control</span></footer>
+    </div>
+  </div>
+
+  <div class="modal" id="board-modal" role="dialog" aria-modal="true" aria-labelledby="board-title" hidden>
+    <div class="board-deck">
+      <button class="close-button" id="close-board" aria-label="Close board presentation">×</button>
+      <div class="slide active" data-slide="0">
+        <span class="eyebrow accent">TOKYO PET PLATFORM</span>
+        <h2 id="board-title">Turn fragmented activity into a measurable operating system.</h2>
+        <p>One connected journey aligns commercial performance, customer experience and responsible placement.</p>
+        <div class="board-metrics"><div><strong>1 + 1</strong><span>Customer + Animal identity</span></div><div><strong>6 weeks</strong><span>Operational MVP</span></div><div><strong>≥95%</strong><span>Traceability gate</span></div></div>
+      </div>
+      <div class="slide" data-slide="1">
+        <span class="eyebrow accent">WHY IT WINS</span>
+        <h2>Growth is only valuable when the outcome is visible.</h2>
+        <div class="board-columns"><div><span>01</span><h3>Demand intelligence</h3><p>Know which sources produce consultation-ready households.</p></div><div><span>02</span><h3>Placement control</h3><p>Connect suitability, animal history and handover integrity.</p></div><div><span>03</span><h3>Learning loop</h3><p>Use post-handover outcomes to improve the next decision.</p></div></div>
+      </div>
+      <div class="slide" data-slide="2">
+        <span class="eyebrow accent">THE NEXT MOVE</span>
+        <h2>Prove one complete journey in 14 days.</h2>
+        <p>Inventory the data. Model the critical events. Demonstrate source → consultation → match → handover → feedback.</p>
+        <div class="next-move"><strong>Executive decision</strong><span>Approve the vertical-slice discovery package</span><button class="primary-button" data-toast="Decision captured for the concept demo.">Capture decision</button></div>
+      </div>
+      <div class="deck-controls"><button id="prev-slide" disabled>Previous</button><span><b id="slide-current">1</b> / 3</span><button id="next-slide">Next</button></div>
+    </div>
+  </div>
+
+  <div class="modal readiness-modal" id="readiness-modal" role="dialog" aria-modal="true" aria-labelledby="readiness-title" hidden>
+    <div class="readiness-dialog">
+      <button class="close-button" id="close-readiness" aria-label="Close delivery plan">×</button>
+      <span class="eyebrow accent">DELIVERY PLAN</span><h2 id="readiness-title">Six-week path to operating proof</h2>
+      <div class="timeline"><div class="done"><b>01</b><span><strong>Discovery</strong><small>Model, sources, risks</small></span><em>W1–2</em></div><div class="current"><b>02</b><span><strong>Operational MVP</strong><small>Registry, CRM, placement</small></span><em>W3–6</em></div><div><b>03</b><span><strong>Integrations</strong><small>LINE, web, ads, POS</small></span><em>W7–10</em></div><div><b>04</b><span><strong>Analytics</strong><small>Metrics and cohorts</small></span><em>M3–4</em></div></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
