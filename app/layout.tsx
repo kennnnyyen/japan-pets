@@ -18,6 +18,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     <html lang="en">
       <head>
         <link rel="stylesheet" href="/platform.css" />
+        <link rel="stylesheet" href="/pet-images.css" />
       </head>
       <body>{children}</body>
     </html>

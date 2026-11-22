@@ -9,3 +9,4 @@ npm-debug.log*
 .DS_Store
 public/platform.css
 public/platform.js
+public/pet-images.css

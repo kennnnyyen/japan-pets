@@ -3,6 +3,7 @@
 An interactive demonstration of the proposed Tokyo pet breeding and sales platform, covering buyer CRM, spending intent, animal pricing and litter records, responsible matching, deposits, revenue, handover controls and post-sale follow-up.
 
 All people, animals and activity in the prototype are illustrative dummy data.
+The animal portraits are original AI-generated demo assets and do not depict animals offered for sale.
 
 ## Local development
 
