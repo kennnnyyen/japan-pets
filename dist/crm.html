@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive Tokyo Pet CRM and placement platform prototype.">
+  <meta name="theme-color" content="#122b3f">
+  <title>Tokyo Pet OS — CRM Prototype</title>
+  <link rel="stylesheet" href="platform.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" data-view-link="command"><span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9.5 14.2c-2 0-3.6-2-3.6-4.3S7.2 6 9 6c1.9 0 3.4 1.8 3.4 4.1 0 2.4-1.1 4.1-2.9 4.1Zm13 0c-1.8 0-2.9-1.7-2.9-4.1 0-2.3 1.5-4.1 3.4-4.1 1.8 0 3.1 1.6 3.1 3.9s-1.6 4.3-3.6 4.3ZM5.2 21c-1.8 0-3.2-1.6-3.2-3.7s1.2-3.6 2.9-3.6c1.9 0 3.3 1.7 3.3 3.8S6.9 21 5.2 21Zm21.6 0c-1.7 0-3-1.4-3-3.5s1.4-3.8 3.3-3.8c1.7 0 2.9 1.5 2.9 3.6S28.6 21 26.8 21ZM16 13.2c4 0 8.2 5.3 8.2 9.1 0 2.8-2 4.3-4.5 3.4-2.3-.9-5.1-.9-7.4 0-2.5.9-4.5-.6-4.5-3.4 0-3.8 4.2-9.1 8.2-9.1Z"/></svg></span><span><strong>Tokyo Pet OS</strong><small>Care &amp; placement platform</small></span></a>
+      <div class="workspace-switcher"><span class="shop-icon">東</span><span><strong>Tokyo pilot</strong><small>Shibuya centre</small></span><button aria-label="Switch workspace">⌄</button></div>
+      <nav aria-label="Platform navigation">
+        <span class="nav-label">WORKSPACE</span>
+        <a class="nav-link active" href="#command" data-view-link="command"><i>⌂</i>Command centre</a>
+        <a class="nav-link" href="#households" data-view-link="households"><i>◎</i>Households <b>23</b></a>
+        <a class="nav-link" href="#animals" data-view-link="animals"><i>◇</i>Animals</a>
+        <a class="nav-link" href="#matches" data-view-link="matches"><i>⌁</i>Match board <b class="teal">8</b></a>
+        <a class="nav-link" href="#placements" data-view-link="placements"><i>□</i>Placements</a>
+        <span class="nav-label second">OPERATIONS</span>
+        <a class="nav-link" href="#followups" data-view-link="followups"><i>◷</i>Follow-ups <b class="alert">6</b></a>
+        <a class="nav-link" href="#reports" data-view-link="reports"><i>▤</i>Reports</a>
+      </nav>
+      <div class="system-card"><div><span class="pulse"></span><strong>All systems healthy</strong></div><p>Last sync 2 minutes ago</p><button data-action="sync">View integrations</button></div>
+      <div class="user-card"><span class="avatar">KY</span><span><strong>Kenny Yen</strong><small>Platform owner</small></span><button aria-label="User menu">•••</button></div>
+    </aside>
+
+    <div class="main-shell">
+      <header class="topbar"><button class="menu" id="menu" aria-label="Open navigation">☰</button><label class="global-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg><input id="search" type="search" placeholder="Search household, animal or ID…"><kbd>⌘ K</kbd></label><div class="top-actions"><button class="help" aria-label="Help">?</button><button class="notification" aria-label="Notifications">♢<span>3</span></button><button class="primary" id="add-enquiry">＋ Add enquiry</button></div></header>
+      <main>
+        <div class="prototype-banner"><span>PROTOTYPE</span><p>All people, animals and activity shown here are illustrative dummy data.</p><button id="tour-button">Take a 60-second tour</button></div>
+
+        <section class="view active" id="view-command">
+          <div class="page-title"><div><span class="eyebrow">MONDAY · 23 NOVEMBER</span><h1>Good morning, Kenny.</h1><p>Here’s where the team can create the most value today.</p></div><div class="title-actions"><button class="secondary" data-action="brief">Export daily brief</button><button class="primary" data-view-link="matches">Review matches</button></div></div>
+          <div class="stat-grid">
+            <article><span class="stat-icon green">↗</span><div><span>New enquiries</span><strong>23</strong><small><b>+18%</b> vs last week</small></div><svg viewBox="0 0 90 35"><path d="M2 30 16 23 29 26 42 13 56 18 70 8 88 4"/></svg></article>
+            <article><span class="stat-icon blue">◉</span><div><span>Consultations today</span><strong>11</strong><small>Next at <b class="ink">10:30</b></small></div><svg viewBox="0 0 90 35"><path d="M2 26 16 22 29 25 42 20 56 14 70 17 88 8"/></svg></article>
+            <article><span class="stat-icon purple">⌁</span><div><span>Matches to review</span><strong>8</strong><small><b>3 high confidence</b></small></div><svg viewBox="0 0 90 35"><path d="M2 29 16 25 29 19 42 22 56 12 70 10 88 6"/></svg></article>
+            <article><span class="stat-icon amber">!</span><div><span>Follow-ups overdue</span><strong>6</strong><small>Oldest <b class="amber-text">2 days</b></small></div><svg viewBox="0 0 90 35"><path d="M2 12 16 18 29 11 42 20 56 15 70 23 88 18"/></svg></article>
+          </div>
+          <div class="content-grid">
+            <article class="panel pipeline-panel">
+              <div class="panel-head"><div><span class="eyebrow">CRM PIPELINE</span><h2>Active household journeys</h2><p>Every enquiry, conversation and next step in one place</p></div><div class="head-actions"><button class="filter" data-action="filter">☷ Filter <span>2</span></button><button class="more">•••</button></div></div>
+              <div class="pipeline-tabs" role="tablist"><button class="active" data-stage="all">All active <b>47</b></button><button data-stage="new">New <b>12</b></button><button data-stage="qualified">Qualified <b>15</b></button><button data-stage="consultation">Consultation <b>11</b></button><button data-stage="matching">Matching <b>9</b></button></div>
+              <div class="table-wrap"><table><thead><tr><th>Household</th><th>Looking for</th><th>Source</th><th>Last activity</th><th>Stage</th><th>Suggested</th><th></th></tr></thead><tbody id="household-rows"></tbody></table></div>
+              <div class="table-footer"><span>Showing 5 of 47 active journeys</span><button data-view-link="households">View all households</button></div>
+            </article>
+            <aside class="right-stack">
+              <article class="panel action-panel"><div class="panel-head compact"><div><span class="eyebrow">ACTION CENTRE</span><h2>Today’s priorities</h2></div><span class="count-pill">9 open</span></div><div id="action-list"></div><button class="panel-link" data-view-link="followups">Open full task queue</button></article>
+              <article class="panel health-panel"><div class="panel-head compact"><div><span class="eyebrow">DATA CONFIDENCE</span><h2>Record health</h2></div><strong>96%</strong></div><div class="health-bar"><span></span></div><div class="health-items"><span><i class="ok"></i>Known acquisition source <b>97%</b></span><span><i class="ok"></i>Animal profile complete <b>96%</b></span><span><i class="warn"></i>Duplicate review queue <b>4</b></span></div></article>
+            </aside>
+          </div>
+          <article class="panel opportunity-panel"><div class="panel-head"><div><span class="eyebrow">MATCH OPPORTUNITIES</span><h2>High-confidence pairings</h2><p>Rules narrow the search; staff make the final, responsible decision</p></div><button class="secondary" data-view-link="matches">Open match board</button></div><div class="opportunity-grid" id="opportunity-grid"></div></article>
+        </section>
+
+        <section class="view" id="view-households"><div class="page-title"><div><span class="eyebrow">CUSTOMER CRM</span><h1>Households</h1><p>One history across enquiries, consultations, consent and outcomes.</p></div><button class="primary" data-action="new-enquiry">＋ Add enquiry</button></div><div class="panel list-panel"><div class="list-toolbar"><label><span>⌕</span><input id="household-search" placeholder="Search the 47 active households"></label><div><button class="secondary">All stages⌄</button><button class="secondary">All owners⌄</button></div></div><div class="table-wrap"><table><thead><tr><th>Household</th><th>Preference</th><th>Readiness</th><th>Consent</th><th>Owner</th><th>Next step</th><th></th></tr></thead><tbody id="all-households"></tbody></table></div></div></section>
+
+        <section class="view" id="view-animals"><div class="page-title"><div><span class="eyebrow">ANIMAL REGISTRY</span><h1>Animals</h1><p>Availability, provenance, care history and placement readiness.</p></div><button class="primary" data-action="animal">＋ Add animal</button></div><div class="registry-summary"><div><span>Available</span><strong>38</strong></div><div><span>Reserved</span><strong>12</strong></div><div><span>Care hold</span><strong>5</strong></div><div><span>Placed this month</span><strong>17</strong></div></div><div class="animal-grid" id="animal-grid"></div></section>
+
+        <section class="view" id="view-matches"><div class="page-title"><div><span class="eyebrow">RESPONSIBLE MATCHING</span><h1>Match board</h1><p>Move promising pairings through review, consultation and reservation.</p></div><div class="title-actions"><button class="secondary">Match rules</button><button class="primary" data-action="run-match">Run matching</button></div></div><div class="match-summary"><div><span class="score-dot high"></span><strong>3</strong><small>High confidence</small></div><div><span class="score-dot medium"></span><strong>5</strong><small>Needs review</small></div><div><span class="score-dot reserved"></span><strong>4</strong><small>Reserved</small></div><p><b>How scores work:</b> preference, home fit, care needs, timing and staff assessment. A score supports — never replaces — human judgement.</p></div><div class="kanban" id="match-kanban"></div></section>
+
+        <section class="view" id="view-followups"><div class="page-title"><div><span class="eyebrow">CUSTOMER OUTCOMES</span><h1>Follow-up queue</h1><p>Never lose a promised call, wellbeing check or feedback moment.</p></div><button class="primary" data-action="complete-all">Start call session</button></div><div class="followup-layout"><article class="panel"><div class="queue-filter"><button class="active">Due now <b>6</b></button><button>Today <b>11</b></button><button>Upcoming <b>24</b></button></div><div id="followup-list"></div></article><article class="panel outcome-card"><span class="eyebrow">90-DAY OUTCOMES</span><h2>Care continues after handover.</h2><div class="outcome-score"><strong>4.8</strong><span>average satisfaction<br><b>42 responses</b></span></div><div class="outcome-bars"><span>Day-2 response <i><b style="width:94%"></b></i><em>94%</em></span><span>Day-14 response <i><b style="width:88%"></b></i><em>88%</em></span><span>Day-30 response <i><b style="width:79%"></b></i><em>79%</em></span></div></article></div></section>
+
+        <section class="view placeholder-view" id="view-placements"><div class="page-title"><div><span class="eyebrow">PLACEMENT OPERATIONS</span><h1>Placements</h1><p>Reservations, payments, handovers and destination records.</p></div></div><div class="placeholder-grid"><article><span>Ready for handover</span><strong>4</strong><p>All identity, consent and preparation checks complete.</p></article><article><span>Reservations</span><strong>12</strong><p>Every animal and household relationship linked.</p></article><article><span>Integrity</span><strong>100%</strong><p>No orphaned handover records in this demo.</p></article></div></section>
+        <section class="view placeholder-view" id="view-reports"><div class="page-title"><div><span class="eyebrow">GOVERNED ANALYTICS</span><h1>Reports</h1><p>Traceable metrics for decisions, not vanity charts.</p></div></div><div class="placeholder-grid"><article><span>Channel quality</span><strong>Search + Maps</strong><p>Leading illustrative source for qualified enquiries.</p></article><article><span>Placement speed</span><strong>12.4 days</strong><p>Median from available status to completed handover.</p></article><article><span>Journey coverage</span><strong>97.2%</strong><p>Known source and recorded outcome.</p></article></div></section>
+      </main>
+    </div>
+  </div>
+
+  <aside class="record-drawer" id="record-drawer" aria-hidden="true"><div class="drawer-head"><div><span class="record-id" id="drawer-id">HH-2048</span><h2 id="drawer-name">Aiko Tanaka</h2><p id="drawer-contact">Tokyo · LINE preferred</p></div><button id="close-drawer" aria-label="Close record">×</button></div><div class="drawer-stage"><span>Current stage</span><strong id="drawer-stage">Consultation booked</strong><button id="advance-stage">Advance stage</button></div><div class="drawer-body"><section><h3>Household fit</h3><div class="profile-grid" id="drawer-profile"></div></section><section><div class="section-head"><h3>Suggested animals</h3><button data-view-link="matches">Open matching</button></div><div id="drawer-matches"></div></section><section><h3>Journey timeline</h3><div class="timeline" id="drawer-timeline"></div></section><section><h3>Consent &amp; communication</h3><div class="consent-row"><span class="tag success">LINE consented</span><span class="tag success">Email consented</span><span class="tag neutral">Partner sharing off</span></div></section></div></aside><div class="drawer-backdrop" id="drawer-backdrop"></div>
+
+  <div class="modal" id="enquiry-modal" hidden><form id="enquiry-form"><button type="button" class="modal-close" aria-label="Close enquiry form">×</button><span class="eyebrow teal-text">NEW CRM RECORD</span><h2>Add a household enquiry</h2><p>This prototype stores the new dummy record only in your current browser session.</p><div class="form-grid"><label>Full name<input name="name" required placeholder="e.g. Demo household"></label><label>Preferred contact<select name="contact"><option>LINE</option><option>Email</option><option>Phone</option></select></label><label>Looking for<select name="preference"><option>Small dog</option><option>Medium dog</option><option>Cat</option><option>Open to guidance</option></select></label><label>Acquisition source<select name="source"><option>Search + Maps</option><option>Walk-in</option><option>Pet platform</option><option>Instagram</option><option>Referral</option></select></label><label class="wide">Notes<textarea name="notes" placeholder="Household needs, timing or important context"></textarea></label></div><label class="check"><input type="checkbox" required> Customer permission to record and follow up has been confirmed.</label><div class="modal-actions"><button type="button" class="secondary modal-cancel">Cancel</button><button type="submit" class="primary">Create enquiry</button></div></form></div>
+  <div class="tour" id="tour" hidden><button class="tour-close">×</button><span id="tour-step">1 / 4</span><h2 id="tour-title">One customer history</h2><p id="tour-copy">The CRM connects source, consent, conversations, preferences and outcomes to one stable household record.</p><div><button class="secondary" id="tour-prev" disabled>Previous</button><button class="primary" id="tour-next">Next</button></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="platform.js"></script>
+</body>
+</html>
