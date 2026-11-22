@@ -1,6 +1,6 @@
 # Tokyo Pet OS CRM Prototype
 
-An interactive demonstration of the proposed Tokyo pet business platform, covering household CRM, animal records, responsible matching, placement controls and post-handover follow-up.
+An interactive demonstration of the proposed Tokyo pet breeding and sales platform, covering buyer CRM, spending intent, animal pricing and litter records, responsible matching, deposits, revenue, handover controls and post-sale follow-up.
 
 All people, animals and activity in the prototype are illustrative dummy data.
 

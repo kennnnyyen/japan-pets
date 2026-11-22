@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 export const metadata: Metadata = {
   title: "Tokyo Pet OS — CRM Prototype",
   description:
-    "Interactive CRM, animal registry, matching, placement and follow-up prototype for the Tokyo pet platform.",
+    "Interactive breeding, buyer CRM, animal inventory, sales and handover prototype for the Tokyo pet platform.",
 };
 
 export const viewport: Viewport = {
