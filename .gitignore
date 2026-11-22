@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+.vercel/
+.env*
+!.env.example
+npm-debug.log*
+*.tsbuildinfo
+.DS_Store
+public/platform.css
+public/platform.js
