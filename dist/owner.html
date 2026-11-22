@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Tokyo Pet Owner Portal</title></head>
+<body>
+  <div class="owner-app">
+    <header class="owner-header">
+      <a class="owner-brand" href="/"><span>♣</span><strong>Tokyo Pet</strong><small>Owner portal</small></a>
+      <nav aria-label="Owner portal navigation">
+        <button class="active" data-owner-view="discover">Discover pets</button>
+        <button data-owner-view="my-pets">My pets</button>
+        <button data-owner-view="services">Care services</button>
+        <button data-owner-view="requests">My requests <b id="request-count">2</b></button>
+      </nav>
+      <div class="owner-account"><span>AY</span><strong>Aiko</strong><button aria-label="Account menu">⌄</button></div>
+    </header>
+
+    <main>
+      <div class="owner-prototype"><b>PROTOTYPE</b><span>All people, animal portraits, services, prices and records are illustrative dummy data.</span><a href="/crm">View admin CRM</a></div>
+
+      <section class="owner-view active" id="owner-discover">
+        <div class="discover-hero">
+          <div><span class="owner-kicker">FIND YOUR COMPANION</span><h1>Choose with confidence.</h1><p>Compare breed, age, health, breeder record and price—then register interest without losing the conversation.</p><div class="discovery-search"><input id="pet-search" placeholder="Search breed or pet name"><select id="species-filter"><option value="all">Dogs &amp; cats</option><option value="dog">Dogs</option><option value="cat">Cats</option></select><button>Search</button></div></div>
+          <div class="hero-pet"><img src="/pets/sora-toy-poodle.jpg" alt="Sora, Toy poodle puppy"><span><small>FEATURED THIS WEEK</small><strong>Sora · Toy poodle</strong><em>12 weeks · ¥420,000</em></span></div>
+        </div>
+
+        <div class="owner-heading"><div><span class="owner-kicker">AVAILABLE NOW</span><h2>Meet the current animals</h2></div><span>8 illustrative profiles</span></div>
+        <div class="market-grid" id="market-grid"></div>
+      </section>
+
+      <section class="owner-view" id="owner-my-pets">
+        <div class="owner-heading"><div><span class="owner-kicker">MY PETS</span><h1>Everything Mochi needs, in one place.</h1><p>Ownership, health and care records remain connected to the team that supports you.</p></div><button class="owner-primary" data-action="add-pet">＋ Add another pet</button></div>
+        <div class="pet-profile">
+          <div class="owned-pet-photo"><img src="/pets/mugi-shiba.jpg" alt="Mochi, Shiba"><span>Verified owner</span></div>
+          <div class="pet-identity"><span class="owner-kicker">MOCHI · PET-1042</span><h2>Shiba · Female · 2 years</h2><p>Purchased 14 May 2025 · Microchip ending 8241</p><div class="identity-tags"><span>Vaccinated</span><span>Insurance active</span><span>Annual check due</span></div></div>
+          <div class="care-score"><strong>86%</strong><span>care plan complete</span><i><b></b></i></div>
+        </div>
+        <div class="care-dashboard">
+          <article><span>UPCOMING</span><h3>Annual vaccination</h3><strong>Due in 12 days</strong><p>Core booster and health review.</p><button data-service="Vaccination appointment" data-pet="Mochi">Book vaccine</button></article>
+          <article><span>HEALTH RECORD</span><h3>Last vet visit</h3><strong>18 August 2026</strong><p>Routine check · no concerns.</p><button data-service="Vet consultation" data-pet="Mochi">Book vet</button></article>
+          <article><span>INSURANCE</span><h3>Tokyo Pet Protect</h3><strong>Active · Standard</strong><p>Renews 14 May 2027.</p><button data-service="Insurance review" data-pet="Mochi">Review cover</button></article>
+          <article><span>DOCUMENTS</span><h3>Ownership file</h3><strong>6 documents</strong><p>Contract, pedigree and health certificates.</p><button data-action="documents">View documents</button></article>
+        </div>
+      </section>
+
+      <section class="owner-view" id="owner-services">
+        <div class="owner-heading"><div><span class="owner-kicker">ONE-STOP CARE</span><h1>Request care without starting again.</h1><p>Your pet profile and history travel with each request, ready for the support team.</p></div></div>
+        <div class="service-grid">
+          <article><span class="service-icon">✚</span><h2>Vet consultation</h2><p>Routine checks, illness concerns and referral coordination.</p><button data-service="Vet consultation" data-pet="Mochi">Request appointment</button></article>
+          <article><span class="service-icon">◉</span><h2>Vaccinations</h2><p>See what is due and request the right vaccine appointment.</p><button data-service="Vaccination appointment" data-pet="Mochi">Book vaccination</button></article>
+          <article><span class="service-icon">▣</span><h2>Pet insurance</h2><p>Ask for cover, renewals or help understanding a policy.</p><button data-service="Insurance consultation" data-pet="Mochi">Get insurance help</button></article>
+          <article><span class="service-icon">♡</span><h2>Care guidance</h2><p>Nutrition, behaviour, grooming and post-purchase support.</p><button data-service="Care guidance" data-pet="Mochi">Ask the care team</button></article>
+        </div>
+        <div class="service-connection"><div><span class="owner-kicker">WHAT HAPPENS NEXT</span><h2>Your request goes straight to the CRM.</h2></div><ol><li><b>1</b><span><strong>You submit</strong><small>Choose the pet, service and preferred timing.</small></span></li><li><b>2</b><span><strong>Staff review</strong><small>The CRM shows your ownership and care history.</small></span></li><li><b>3</b><span><strong>You get an update</strong><small>Track the request here without repeating details.</small></span></li></ol></div>
+      </section>
+
+      <section class="owner-view" id="owner-requests">
+        <div class="owner-heading"><div><span class="owner-kicker">MY REQUESTS</span><h1>Track every conversation.</h1><p>Purchase interest and owner care requests appear together with clear next steps.</p></div><button class="owner-primary" data-owner-view="services">＋ New service request</button></div>
+        <div class="request-list" id="request-list"></div>
+      </section>
+    </main>
+
+    <div class="interest-modal" id="interest-modal" hidden>
+      <form id="interest-form"><button type="button" class="modal-close">×</button><span class="owner-kicker">REGISTER INTEREST</span><h2 id="interest-title">Tell us about your interest</h2><p id="interest-summary"></p><label>Preferred contact<select name="contact"><option>LINE</option><option>Email</option><option>Phone</option></select></label><label>Purchase timing<select name="timing"><option>Ready now</option><option>Within 1 month</option><option>Within 2–3 months</option><option>Still exploring</option></select></label><label>Message<textarea name="message" placeholder="Ask about availability, visit times or the breeder record"></textarea></label><label class="consent"><input type="checkbox" required> I agree to be contacted about this animal.</label><div><button type="button" class="owner-secondary modal-cancel">Cancel</button><button class="owner-primary" type="submit">Send interest</button></div></form>
+    </div>
+    <div class="owner-toast" id="owner-toast" role="status" aria-live="polite"></div>
+  </div>
+  <script src="owner.js"></script>
+</body>
+</html>

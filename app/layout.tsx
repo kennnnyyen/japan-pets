@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "Tokyo Pet OS — CRM Prototype",
+  title: "Tokyo Pet OS — Connected Commerce & Care Prototype",
   description:
-    "Interactive breeding, buyer CRM, animal inventory, sales and handover prototype for the Tokyo pet platform.",
+    "Interactive owner portal and admin CRM prototype connecting pet discovery, sales, ownership and care services.",
 };
 
 export const viewport: Viewport = {
@@ -17,8 +17,6 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="en">
       <head>
-        <link rel="stylesheet" href="/platform.css" />
-        <link rel="stylesheet" href="/pet-images.css" />
       </head>
       <body>{children}</body>
     </html>

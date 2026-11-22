@@ -1,5 +1,6 @@
 .animal-visual {
-  height: 190px;
+  height: auto;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: #dfe9eb;
 }
@@ -8,9 +9,63 @@
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
-  object-position: center 36%;
+  object-fit: contain;
+  object-position: center;
   transition: transform 240ms ease;
+}
+
+.portal-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.request-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+  margin-bottom: 13px;
+}
+
+.request-summary article {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.request-summary span,
+.request-summary strong,
+.request-summary small {
+  display: block;
+}
+
+.request-summary span,
+.request-summary small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.request-summary strong {
+  color: var(--teal);
+  font-size: 27px;
+  margin: 6px 0;
+}
+
+.owner-request-panel {
+  padding: 20px;
+}
+
+.owner-request-panel table {
+  margin-top: 14px;
+}
+
+.owner-request-panel .pet-photo.photo {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
 }
 
 .animal-card:hover .animal-visual > img {
@@ -55,6 +110,16 @@
 
 @media (max-width: 560px) {
   .animal-visual {
-    height: 240px;
+    height: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .request-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .top-actions .portal-link:first-of-type {
+    display: none;
   }
 }

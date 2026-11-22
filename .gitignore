@@ -10,3 +10,6 @@ npm-debug.log*
 public/platform.css
 public/platform.js
 public/pet-images.css
+public/landing.css
+public/owner.css
+public/owner.js

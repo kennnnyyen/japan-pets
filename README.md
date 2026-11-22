@@ -5,6 +5,12 @@ An interactive demonstration of the proposed Tokyo pet breeding and sales platfo
 All people, animals and activity in the prototype are illustrative dummy data.
 The animal portraits are original AI-generated demo assets and do not depict animals offered for sale.
 
+## Prototype routes
+
+- `/` — dual-entry landing page for customers and staff
+- `/portal` — buyer and owner portal for pet discovery, interest registration and care requests
+- `/crm` — admin CRM for sales, animal inventory, owners and service requests
+
 ## Local development
 
 Requires Node.js 20.9 or newer.

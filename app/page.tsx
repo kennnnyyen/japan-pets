@@ -1,13 +1,12 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import Script from "next/script";
 
-function getPrototypeMarkup(): string {
-  const document = readFileSync(join(process.cwd(), "dist", "crm.html"), "utf8");
-  const body = document.match(/<body>([\s\S]*?)<script\s+src="platform\.js"><\/script>\s*<\/body>/i);
+function getLandingMarkup(): string {
+  const document = readFileSync(join(process.cwd(), "dist", "landing.html"), "utf8");
+  const body = document.match(/<body>([\s\S]*?)<\/body>/i);
 
   if (!body) {
-    throw new Error("The CRM prototype body could not be extracted from dist/crm.html.");
+    throw new Error("The landing page body could not be extracted from dist/landing.html.");
   }
 
   return body[1];
@@ -16,8 +15,8 @@ function getPrototypeMarkup(): string {
 export default function Home() {
   return (
     <>
-      <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: getPrototypeMarkup() }} />
-      <Script src="/platform.js" strategy="afterInteractive" />
+      <link rel="stylesheet" href="/landing.css" />
+      <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: getLandingMarkup() }} />
     </>
   );
 }
