@@ -24,7 +24,7 @@
         <span class="nav-label second">OPERATIONS</span>
         <a class="nav-link" href="#followups" data-view-link="followups"><i>◷</i>Follow-ups <b class="alert">6</b></a>
         <a class="nav-link" href="#requests" data-view-link="requests"><i>✚</i>Owner requests <b class="teal">8</b></a>
-        <a class="nav-link" href="#reports" data-view-link="reports"><i>▤</i>Reports</a>
+        <a class="nav-link" href="#reports" data-view-link="reports"><i>▤</i>Data &amp; Analytics</a>
       </nav>
       <div class="system-card"><div><span class="pulse"></span><strong>All systems healthy</strong></div><p>Last sync 2 minutes ago</p><button data-action="sync">View integrations</button></div>
       <div class="user-card"><span class="avatar">KY</span><span><strong>Kenny Yen</strong><small>Platform owner</small></span><button aria-label="User menu">•••</button></div>
@@ -69,7 +69,38 @@
         <section class="view" id="view-requests"><div class="page-title"><div><span class="eyebrow">OWNER SUPPORT</span><h1>Owner service requests</h1><p>Requests from the owner portal arrive with the owner, animal, sales and health context already linked.</p></div><a class="primary portal-link" href="/portal">Open owner prototype</a></div><div class="request-summary"><article><span>Open requests</span><strong>8</strong><small>3 submitted today</small></article><article><span>Response target</span><strong>2h</strong><small>Illustrative service level</small></article><article><span>Appointments pending</span><strong>4</strong><small>Waiting for confirmation</small></article><article><span>Owner satisfaction</span><strong>4.8</strong><small>Illustrative score</small></article></div><article class="panel owner-request-panel"><div class="panel-head"><div><span class="eyebrow">CONNECTED QUEUE</span><h2>Requests requiring staff action</h2><p>One queue across vet, vaccine, insurance and ownership support.</p></div><button class="secondary" data-action="request-filter">All request types⌄</button></div><div class="table-wrap"><table><thead><tr><th>Owner &amp; pet</th><th>Request</th><th>Context</th><th>Submitted</th><th>Status</th><th>Assigned to</th><th></th></tr></thead><tbody><tr><td><div class="person"><span class="pet-photo photo"><img src="/pets/mugi-shiba.jpg" alt="Mochi, Shiba"></span><span><strong>Aiko Tanaka</strong><small>Mochi · PET-1042</small></span></div></td><td><strong>Vaccination appointment</strong></td><td>Core booster due in 12 days</td><td>18 min ago</td><td><span class="stage new">New</span></td><td>K. Ito</td><td><button class="open-record" data-action="request-open">›</button></td></tr><tr><td><div class="person"><span class="pet-photo photo"><img src="/pets/leo-ragdoll.jpg" alt="Leo, Ragdoll"></span><span><strong>Haruto Suzuki</strong><small>Leo · PET-1038</small></span></div></td><td><strong>Insurance consultation</strong></td><td>New cover after purchase</td><td>46 min ago</td><td><span class="stage qualified">Reviewing</span></td><td>M. Sato</td><td><button class="open-record" data-action="request-open">›</button></td></tr><tr><td><div class="person"><span class="pet-photo photo"><img src="/pets/rin-mini-dachshund.jpg" alt="Rin, Mini dachshund"></span><span><strong>Yui Kobayashi</strong><small>Rin · PET-1029</small></span></div></td><td><strong>Vet consultation</strong></td><td>Routine post-handover check</td><td>Yesterday</td><td><span class="stage consultation">Appointment offered</span></td><td>A. Mori</td><td><button class="open-record" data-action="request-open">›</button></td></tr><tr><td><div class="person"><span class="pet-photo photo"><img src="/pets/sora-toy-poodle.jpg" alt="Sora, Toy poodle"></span><span><strong>Mei Nakamura</strong><small>Sora · Purchase interest</small></span></div></td><td><strong>Care guidance</strong></td><td>First-time owner preparation</td><td>Yesterday</td><td><span class="stage matching">In progress</span></td><td>K. Ito</td><td><button class="open-record" data-action="request-open">›</button></td></tr></tbody></table></div></article></section>
 
         <section class="view placeholder-view" id="view-placements"><div class="page-title"><div><span class="eyebrow">SALES OPERATIONS</span><h1>Sales &amp; handovers</h1><p>Asking prices, reservations, deposits, balances, contracts and handovers.</p></div></div><div class="placeholder-grid"><article><span>Expected sales value</span><strong>¥12.8m</strong><p>Open qualified opportunities weighted by current sales stage.</p></article><article><span>Deposits collected</span><strong>¥3.26m</strong><p>12 animals reserved with the buyer and payment linked.</p></article><article><span>Ready for handover</span><strong>4</strong><p>Contract, final balance and health documentation complete.</p></article></div></section>
-        <section class="view placeholder-view" id="view-reports"><div class="page-title"><div><span class="eyebrow">COMMERCIAL ANALYTICS</span><h1>Sales reports</h1><p>Traceable sales figures for pricing, demand and revenue decisions.</p></div></div><div class="placeholder-grid"><article><span>Sales this month</span><strong>¥8.4m</strong><p>17 completed sales, shown as illustrative prototype data.</p></article><article><span>Average sale value</span><strong>¥438k</strong><p>Average final price across completed pet sales.</p></article><article><span>Budget capture rate</span><strong>91%</strong><p>Active buyers with a confirmed target spending range.</p></article></div></section>
+        <section class="view" id="view-reports">
+          <div class="page-title"><div><h1>Data &amp; Analytics</h1><p>Follow a buyer from enquiry to handover and see how the data informs expansion.</p></div><div class="title-actions"><button class="primary" id="warehouse-refresh" type="button">Refresh warehouse</button></div></div>
+          <div class="analytics-flow" aria-label="Extract, load and transform pipeline">
+            <div><strong>Extract</strong><span>Portal, CRM, campaign spend and site rosters</span></div>
+            <div><strong>Load</strong><span id="warehouse-rows">Demo warehouse</span></div>
+            <div><strong>Transform</strong><span>Sales, marketing and operations marts</span></div>
+          </div>
+          <p id="warehouse-status" class="analytics-status" role="status">Loading the demo warehouse…</p>
+          <article class="panel analytics-panel">
+            <div class="analytics-panel-heading"><div><h2>Portal enquiries</h2><p>Register interest in the owner portal using this browser, then record each step here. Refresh the warehouse to update the reports.</p></div><a class="secondary" href="/portal">Open owner portal</a></div>
+            <p id="analytics-enquiry-status" role="status"></p>
+            <div id="analytics-enquiries" class="analytics-enquiries"></div>
+          </article>
+          <div id="analytics-funnel" class="analytics-funnel" aria-label="Enquiry funnel"></div>
+          <article class="panel analytics-panel"><h2>Sales mart</h2><p>All demo cohorts. Contribution is sale revenue less direct costs.</p><p id="sales-conversion"></p><div id="sales-mart"></div></article>
+          <article class="panel analytics-panel"><h2>Marketing mart</h2><p>All demo cohorts. Cost per sale uses the matched August–October 2026 spend and handovers. Demo enquiries from later periods appear in the counts.</p><div id="marketing-mart"></div></article>
+          <article class="panel analytics-panel"><h2>Operations mart</h2><p>Current demo inventory. Staffing headroom compares rostered and planned care hours at 40 hours per FTE. Capacity figures are illustrative operating assumptions.</p><div id="operations-mart"></div></article>
+          <article class="panel analytics-panel">
+            <div class="analytics-panel-heading"><div><h2>Expansion scenarios</h2><p>Compare cash and unmet demand over 12 months. Sales are capped by each plan’s monthly capacity.</p><p id="scenario-contribution"></p></div></div>
+            <form id="expansion-inputs" class="analytics-inputs">
+              <label>Monthly demand<input name="demand" type="number" min="0" max="200" step="1" required value="38"></label>
+              <label>Opening delay (months)<input name="delay" type="number" min="0" max="12" step="1" required value="0"></label>
+              <label>Opening cash (¥M)<input name="startingCash" type="number" min="0" max="1000" step="1" required value="250"></label>
+              <label>Contribution per sale (¥)<input name="contribution" type="number" min="0" max="1000000" step="1000" required value="205000"></label>
+              <button class="primary" type="submit">Compare plans</button>
+            </form>
+            <p id="scenario-status" role="status"></p>
+            <div id="scenario-report"></div>
+            <details class="analytics-assumptions"><summary>Compare cost and capacity assumptions</summary><div id="scenario-assumptions"></div><p>Illustrative cash model. Upfront spending occurs before month one. Monthly figures exclude financing, taxes and working capital.</p></details>
+          </article>
+          <article class="panel analytics-panel"><div class="analytics-panel-heading"><div><h2>Monthly activity export</h2><p>De-identified monthly enquiry, booking and handover counts by site in Japan time. Use the synthetic history to test a forecasting workflow.</p></div><button class="secondary" type="button" id="analytics-export" disabled>Download CSV</button></div></article>
+        </section>
       </main>
     </div>
   </div>

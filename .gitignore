@@ -13,3 +13,5 @@ public/pet-images.css
 public/landing.css
 public/owner.css
 public/owner.js
+public/analytics-data.mjs
+public/analytics-view.mjs

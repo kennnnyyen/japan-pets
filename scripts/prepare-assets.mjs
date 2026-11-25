@@ -11,3 +11,7 @@ copyFileSync(join(root, "dist", "landing.css"), join(publicDirectory, "landing.c
 copyFileSync(join(root, "dist", "owner.css"), join(publicDirectory, "owner.css"));
 copyFileSync(join(root, "dist", "platform.js"), join(publicDirectory, "platform.js"));
 copyFileSync(join(root, "dist", "owner.js"), join(publicDirectory, "owner.js"));
+
+for (const asset of ["analytics-data.mjs", "analytics-view.mjs"]) {
+  copyFileSync(join(root, "dist", asset), join(publicDirectory, asset));
+}

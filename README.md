@@ -10,6 +10,13 @@ The animal portraits are original AI-generated demo assets and do not depict ani
 - `/` — dual-entry landing page for customers and staff
 - `/portal` — buyer and owner portal for pet discovery, interest registration and care requests
 - `/crm` — admin CRM for sales, animal inventory, owners and service requests
+- `/crm#reports` — ELT demo with sales, marketing and operations marts, expansion scenarios and a monthly CSV export
+
+## Analytics demo
+
+Register interest in an available animal in the owner portal, then open Data & Analytics in the same browser. Qualify the enquiry, book the viewing, record the in-person explanation and complete the handover. Refresh the warehouse to update the marts. The demo stores animal IDs and enquiry stages in the browser. Reporting fixtures, staffing assumptions and expansion scenarios are synthetic.
+
+Run the analytics checks with `node --test tests/analytics-data.test.mjs`.
 
 ## Local development
 

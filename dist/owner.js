@@ -1,12 +1,12 @@
 const pets=[
- {name:'Mugi',breed:'Shiba',species:'dog',age:'14 weeks',sex:'Female',price:'¥480,000',status:'Available',litter:'Spring litter · SH-24',health:'Vaccinated · Vet checked',image:'/pets/mugi-shiba.jpg'},
- {name:'Sora',breed:'Toy poodle',species:'dog',age:'12 weeks',sex:'Male',price:'¥420,000',status:'Available',litter:'Maple litter · TP-18',health:'Vaccinated · Low shed',image:'/pets/sora-toy-poodle.jpg'},
- {name:'Hana',breed:'British shorthair',species:'cat',age:'16 weeks',sex:'Female',price:'¥380,000',status:'Available',litter:'Silver litter · BS-09',health:'Vaccinated · Indoor only',image:'/pets/hana-british-shorthair.jpg'},
- {name:'Kai',breed:'Beagle',species:'dog',age:'13 weeks',sex:'Male',price:'¥340,000',status:'Available',litter:'River litter · BG-11',health:'Vaccinated · Vet checked',image:'/pets/kai-beagle.jpg'},
- {name:'Yuki',breed:'Maltese',species:'dog',age:'11 weeks',sex:'Female',price:'¥460,000',status:'Health hold',litter:'Snow litter · MT-07',health:'Final vet check pending',image:'/pets/yuki-maltese.jpg'},
- {name:'Leo',breed:'Ragdoll',species:'cat',age:'15 weeks',sex:'Male',price:'¥410,000',status:'Available',litter:'Cloud litter · RG-05',health:'Vaccinated · Vet checked',image:'/pets/leo-ragdoll.jpg'},
- {name:'Rin',breed:'Mini dachshund',species:'dog',age:'12 weeks',sex:'Female',price:'¥450,000',status:'Deposit paid',litter:'Autumn litter · MD-21',health:'Vaccinated · Vet checked',image:'/pets/rin-mini-dachshund.jpg'},
- {name:'Maru',breed:'Shiba',species:'dog',age:'17 weeks',sex:'Male',price:'¥440,000',status:'Available',litter:'Spring litter · SH-24',health:'Vaccinated · Vet checked',image:'/pets/maru-shiba.jpg'}
+ {id:'AN-088',name:'Mugi',breed:'Shiba',species:'dog',age:'14 weeks',sex:'Female',price:'¥480,000',status:'Available',litter:'Spring litter · SH-24',health:'Vaccinated · Vet checked',image:'/pets/mugi-shiba.jpg'},
+ {id:'AN-091',name:'Sora',breed:'Toy poodle',species:'dog',age:'12 weeks',sex:'Male',price:'¥420,000',status:'Available',litter:'Maple litter · TP-18',health:'Vaccinated · Low shed',image:'/pets/sora-toy-poodle.jpg'},
+ {id:'AN-076',name:'Hana',breed:'British shorthair',species:'cat',age:'16 weeks',sex:'Female',price:'¥380,000',status:'Available',litter:'Silver litter · BS-09',health:'Vaccinated · Indoor only',image:'/pets/hana-british-shorthair.jpg'},
+ {id:'AN-094',name:'Kai',breed:'Beagle',species:'dog',age:'13 weeks',sex:'Male',price:'¥340,000',status:'Available',litter:'River litter · BG-11',health:'Vaccinated · Vet checked',image:'/pets/kai-beagle.jpg'},
+ {id:'AN-063',name:'Yuki',breed:'Maltese',species:'dog',age:'11 weeks',sex:'Female',price:'¥460,000',status:'Health hold',litter:'Snow litter · MT-07',health:'Final vet check pending',image:'/pets/yuki-maltese.jpg'},
+ {id:'AN-082',name:'Leo',breed:'Ragdoll',species:'cat',age:'15 weeks',sex:'Male',price:'¥410,000',status:'Available',litter:'Cloud litter · RG-05',health:'Vaccinated · Vet checked',image:'/pets/leo-ragdoll.jpg'},
+ {id:'AN-097',name:'Rin',breed:'Mini dachshund',species:'dog',age:'12 weeks',sex:'Female',price:'¥450,000',status:'Deposit paid',litter:'Autumn litter · MD-21',health:'Vaccinated · Vet checked',image:'/pets/rin-mini-dachshund.jpg'},
+ {id:'AN-073',name:'Maru',breed:'Shiba',species:'dog',age:'17 weeks',sex:'Male',price:'¥440,000',status:'Available',litter:'Spring litter · SH-24',health:'Vaccinated · Vet checked',image:'/pets/maru-shiba.jpg'}
 ];
 const requests=[
  {type:'Purchase interest',pet:'Sora',detail:'Visit requested · LINE preferred',status:'Staff reviewing',updated:'Today · 09:42'},
@@ -27,6 +27,39 @@ function filterPets(){const query=$('#pet-search').value.toLowerCase(),species=$
 $$('[data-service]').forEach(button=>button.addEventListener('click',()=>{requests.unshift({type:button.dataset.service,pet:button.dataset.pet,detail:'Preferred timing to be confirmed',status:'Submitted',updated:'Just now'});renderRequests();setOwnerView('requests');showToast('Request sent to the Tokyo Pet support team.')}));
 $$('[data-action]').forEach(button=>button.addEventListener('click',()=>showToast(button.dataset.action==='documents'?'Document library opened in this prototype.':'Pet registration started in this prototype.')));
 $('.modal-close').onclick=closeInterest;$('.modal-cancel').onclick=closeInterest;
-$('#interest-form').addEventListener('submit',event=>{event.preventDefault();const data=new FormData(event.currentTarget);requests.unshift({type:'Purchase interest',pet:selectedPet.name,detail:`${data.get('timing')} · ${data.get('contact')} preferred`,status:'Submitted',updated:'Just now'});renderRequests();closeInterest();event.currentTarget.reset();setOwnerView('requests');showToast('Interest registered and shared with the sales team.')});
+$('#interest-form').addEventListener('submit', async event => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const pet = selectedPet;
+  if (!pet) return;
+  const submit = form.querySelector('[type="submit"]');
+  if (submit.disabled) return;
+  const data = new FormData(form);
+  submit.disabled = true;
+
+  try {
+    const { captureEnquiry } = await import('./analytics-data.mjs');
+    const { id } = captureEnquiry(window.localStorage, {
+      animalId: pet.id,
+      campaign: new URLSearchParams(window.location.search).get('utm_source'),
+    });
+    requests.unshift({
+      type: 'Purchase interest',
+      pet: pet.name,
+      detail: data.get('timing') + ' · ' + data.get('contact') + ' preferred',
+      status: 'Submitted',
+      updated: 'Just now',
+    });
+    renderRequests();
+    closeInterest();
+    form.reset();
+    setOwnerView('requests');
+    showToast('Demo enquiry ' + id.slice(0, 8) + ' is available in the admin CRM on this browser.');
+  } catch {
+    showToast('The demo enquiry could not be saved. Check browser storage and try again.');
+  } finally {
+    submit.disabled = false;
+  }
+});
 document.addEventListener('keydown',event=>{if(event.key==='Escape')closeInterest()});
 renderPets();renderRequests();

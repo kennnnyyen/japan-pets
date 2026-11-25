@@ -4,3 +4,54 @@
 @media(max-width:560px){.global-search kbd{display:none}.top-actions .primary{padding:9px;font-size:0}.top-actions .primary:first-letter{font-size:16px}.prototype-banner p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.prototype-banner button{display:none}.stat-grid{grid-template-columns:1fr}.stat-grid article{grid-template-columns:34px 1fr 72px}.title-actions{width:100%}.title-actions button{flex:1}.form-grid{grid-template-columns:1fr}.form-grid .wide{grid-column:auto}.animal-grid{grid-template-columns:1fr}.registry-summary{grid-template-columns:1fr}.registry-summary div{border-right:0;border-bottom:1px solid var(--line)}.match-summary{grid-template-columns:1fr}.page-title h1{font-size:24px}.opportunity-panel{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 .pairing strong,.pairing small{display:block}.pairing small{font-size:8px;color:var(--muted);margin-top:2px}
+
+/* Data and analytics */
+.analytics-flow, .analytics-funnel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  background: #d9e4eb;
+  border: 1px solid #d9e4eb;
+  border-radius: 12px;
+}
+.analytics-flow > div, .analytics-funnel > div { background: #eef6f7; padding: 14px 16px; }
+.analytics-flow strong, .analytics-flow span, .analytics-funnel strong, .analytics-funnel span { display: block; }
+.analytics-flow strong { margin-bottom: 3px; }
+.analytics-flow span, .analytics-funnel span, .analytics-panel p, .analytics-status { color: #526b7c; font-size: .875rem; }
+.analytics-status { margin: 10px 0 16px; }
+.analytics-panel, .analytics-funnel { margin-bottom: 16px; }
+.analytics-panel { padding: clamp(14px, 2.2vw, 24px); }
+.analytics-panel h2 { font-size: 1.125rem; margin: 0 0 6px; }
+.analytics-panel p { margin: 0 0 12px; }
+.analytics-panel p:empty { display: none; }
+.analytics-panel-heading { display: flex; align-items: start; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; }
+.analytics-panel-heading > div { flex: 1 1 290px; }
+.analytics-funnel { grid-template-columns: repeat(auto-fit, minmax(115px, 1fr)); }
+.analytics-funnel strong { color: #116b64; font-size: 1.5rem; }
+.analytics-table { overflow: auto; max-inline-size: 100%; border: 1px solid #d9e4eb; border-radius: 8px; }
+.analytics-table table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: .875rem; }
+.analytics-table th, .analytics-table td { text-align: start; padding: 9px 12px; border-bottom: 1px solid #e6edf1; }
+.analytics-table thead th, .analytics-table tbody th { background: #f2f7f9; }
+.analytics-table tbody th { position: sticky; inset-inline-start: 0; min-width: 8rem; }
+.analytics-table tbody tr:last-child > * { border-bottom: 0; }
+.analytics-table td { white-space: nowrap; }
+.analytics-inputs, .analytics-enquiry-actions { display: flex; flex-wrap: wrap; align-items: end; gap: 10px; }
+.analytics-inputs label, .analytics-enquiry-actions label { display: grid; gap: 4px; font-size: .875rem; }
+.analytics-inputs input, .analytics-enquiry-actions input {
+  min-height: 37px; width: 100%; max-width: 180px; padding: 6px 9px; color: inherit; font: inherit; border: 1px solid #a8bdc9; border-radius: 7px;
+}
+.analytics-enquiry { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 0; border-top: 1px solid #d9e4eb; }
+.analytics-enquiry small { display: block; margin-top: 4px; font-size: .8125rem; color: #526b7c; }
+.analytics-assumptions { margin-top: 12px; }
+.analytics-assumptions summary { margin-bottom: 10px; cursor: pointer; }
+#view-reports :focus-visible { outline: 2px solid #0b766d; outline-offset: 3px; }
+@media (max-width: 540px) {
+  .analytics-flow { grid-template-columns: 1fr; }
+}
+.analytics-table th, .analytics-table td {
+  color: #254353; font-size: .875rem; letter-spacing: normal; text-transform: none;
+}
+.analytics-table thead th { color: #405c6c; font-weight: 650; }
+.analytics-table tbody th { min-width: 8rem; }
+.analytics-inputs { margin-bottom: 12px; }
