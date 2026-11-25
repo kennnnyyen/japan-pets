@@ -2,3 +2,7 @@
 
 #data-platform .landing-primary { align-self: center; text-decoration: none; white-space: nowrap; }
 #data-platform p { margin-top: 8px; }
+
+#data-platform .presentation-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
+#data-platform .presentation-actions a { text-decoration: none; }
+@media (max-width: 680px) { #data-platform .presentation-actions { justify-content: flex-start; } }

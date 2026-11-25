@@ -12,6 +12,7 @@ The animal portraits are original AI-generated demo assets and do not depict ani
 - `/crm` — admin CRM for sales, animal inventory, owners and service requests
 - `/crm#reports` — ELT demo with sales, marketing and operations marts, expansion scenarios and a monthly CSV export
 - `/data-platform` — architecture walkthrough showing demo actions next to the related pipeline nodes
+- `/presentation` — business slide deck with a data-flow guide and an embedded Blender cutaway on slide 5
 
 ## Analytics demo
 
