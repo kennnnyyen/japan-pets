@@ -140,3 +140,135 @@
 .expectation dt { font-weight: 700; }
 .expectation dd { color: #3b5664; }
 .expectation dd + dt { margin-top: 8px; }
+
+.playButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 7px 12px;
+  border: 1px solid #173b4d;
+  border-radius: 8px;
+  background: #173b4d;
+  color: #fff;
+  font: inherit;
+  font-size: .875rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.playButton:hover { background: #205369; }
+.playIcon {
+  width: 0;
+  height: 0;
+  border-block: 5px solid transparent;
+  border-inline-start: 8px solid var(--mint);
+}
+.playIcon[data-pausing="true"] {
+  width: 8px;
+  height: 10px;
+  border: 0;
+  border-inline: 2px solid var(--mint);
+}
+.diagramPanel {
+  background: radial-gradient(ellipse at 50% 48%, #1a394e 0%, #132a3d 72%);
+}
+.scene {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+  min-height: 42px;
+  border: 1px solid #40687a;
+  border-radius: 8px;
+  background: #102638;
+}
+.sceneCounter {
+  color: var(--mint);
+  font: 650 .8rem ui-monospace, monospace;
+  white-space: nowrap;
+}
+.scene strong { font-size: .875rem; color: #e4f8f3; }
+.connector { position: relative; }
+.connector[data-lit="true"] {
+  background-image: linear-gradient(#96f3d7, #52c7af);
+}
+.connector[data-lit="true"][data-branches]::before {
+  border-color: #64d8ba;
+}
+.packet {
+  position: absolute;
+  inset: 0 0 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.packet::before, .packet::after {
+  position: absolute;
+  content: "";
+  opacity: 0;
+}
+.packet::before {
+  width: 5px;
+  height: 11px;
+  border-radius: 8px;
+  left: calc(50% - 2px);
+  background: #c6ffed;
+  box-shadow: 0 0 8px #9ef8de;
+}
+.connector[data-branches] .packet::after {
+  inset: calc(50% - 1px) 0 auto;
+  height: 2px;
+  background: radial-gradient(ellipse at center, #d0fff0 0%, #88f7d6 18%, transparent 42%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .node { transition: background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease; }
+  .sceneArrival { animation: scene-in 400ms cubic-bezier(.2,.75,.3,1) both; }
+  .packet::before { animation: packet-drop 730ms ease-out 2; }
+  .packet::after { animation: packet-branch 800ms ease-out 2; }
+  .workbench[data-playback="paused"] .packet::before,
+  .workbench[data-playback="paused"] .packet::after,
+  .workbench[data-playback="paused"] .sceneArrival {
+    animation-play-state: paused;
+  }
+}
+@keyframes scene-in {
+  from { opacity: .25; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes packet-drop {
+  0% { opacity: 0; transform: translateY(-12px); }
+  30%, 68% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(17px); }
+}
+@keyframes packet-branch {
+  0% { opacity: 0; transform: scaleX(.05); }
+  35% { opacity: .85; }
+  100% { opacity: 0; transform: scaleX(1); }
+}
+
+.node { position: relative; overflow: hidden; }
+.node > :not(.nodeSignal) { position: relative; }
+.nodeSignal {
+  position: absolute;
+  inset: 0 -45% 0 0;
+  background: linear-gradient(100deg, transparent 25%, #8ef2d63d 52%, transparent 76%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nodeSignal { animation: signal-arrival 830ms ease-out both; }
+  .workbench[data-playback="paused"] .nodeSignal { animation-play-state: paused; }
+}
+@keyframes signal-arrival {
+  from { opacity: 0; transform: translateX(-60%); }
+  28% { opacity: 1; }
+  to { opacity: 0; transform: translateX(45%); }
+}
+
+.presentationControl { width: fit-content; margin-bottom: 14px; }
+@media (max-width: 690px) {
+  .presentationControl { position: sticky; inset-block-start: 8px; z-index: 2; }
+  .diagramPanel { scroll-margin-block-start: 60px; }
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { refreshWarehouse, sites } from "../../dist/analytics-data.mjs";
 import styles from "./walkthrough.module.css";
 
@@ -131,24 +131,36 @@ export function DataPlatformDemo() {
   const [runCount, setRunCount] = useState(0);
   const [snapshot, setSnapshot] = useState<typeof before | null>(null);
   const [forecast, setForecast] = useState<ReturnType<typeof sampleForecast> | null>(null);
+  const [playback, setPlayback] = useState<"idle" | "playing" | "paused">("idle");
+  const diagramPanel = useRef<HTMLElement>(null);
   const activeStep = steps[selected];
   const remaining = completed < steps.length;
 
-  function runElt() {
+  const runElt = useCallback(() => {
     setSnapshot(refreshWarehouse([enquiry], inventory, sources));
     setRunCount(count => count + 1);
-  }
+  }, []);
 
-  function advance() {
+  const advance = useCallback(() => {
     if (!remaining) return;
     if (completed === 3) runElt();
-    if (completed === 5) setForecast(sampleForecast());
+    if (completed === 5) {
+      setForecast(sampleForecast());
+      setPlayback("idle");
+    }
     setSelected(completed);
     setInspected(null);
     setCompleted(completed + 1);
-  }
+  }, [completed, remaining, runElt]);
+
+  useEffect(() => {
+    if (playback !== "playing" || !remaining) return;
+    const timer = window.setTimeout(advance, completed === 0 ? 800 : 6200);
+    return () => window.clearTimeout(timer);
+  }, [advance, completed, playback, remaining]);
 
   function reset() {
+    setPlayback("idle");
     setCompleted(0);
     setSelected(0);
     setInspected(null);
@@ -157,13 +169,36 @@ export function DataPlatformDemo() {
     setForecast(null);
   }
 
+  function pauseForInspection() {
+    if (playback === "playing") setPlayback("paused");
+  }
+
+  function togglePlayback() {
+    if (playback === "playing") {
+      setPlayback("paused");
+      return;
+    }
+    if (!remaining) reset();
+    setInspected(null);
+    setSelected(Math.max(0, remaining ? completed - 1 : 0));
+    setPlayback("playing");
+    if (window.matchMedia("(max-width: 690px)").matches) {
+      diagramPanel.current?.scrollIntoView({ block: "start" });
+    }
+  }
+
   function node(id: NodeId) {
     const info = nodes[id];
+    const signalOrder = activeStep.nodes.indexOf(id);
     return (
       <button key={id} type="button" className={styles.node}
-        data-active={activeStep.nodes.includes(id)}
+        data-active={signalOrder >= 0}
         data-future={id === "external"} aria-pressed={inspected === id}
-        onClick={() => setInspected(id === inspected ? null : id)}>
+        onClick={() => { pauseForInspection(); setInspected(id === inspected ? null : id); }}>
+        {signalOrder >= 0 && showTraces && (
+          <span className={styles.nodeSignal} key={selected + "-" + completed + "-" + runCount}
+            style={{ animationDelay: signalOrder * 140 + "ms" }} aria-hidden="true" />
+        )}
         <strong>{info.title}</strong>
         <span>{info.caption}</span>
       </button>
@@ -172,6 +207,31 @@ export function DataPlatformDemo() {
 
   const directSales = snapshot && snapshot.sales[0].sales - before.sales[0].sales;
   const lineSales = snapshot && snapshot.marketing[1].sales - before.marketing[1].sales;
+  const sceneNotes = [
+    "Ready to trace a showroom enquiry",
+    "LINE enquiry captured for the Tokyo showroom",
+    "Campaign spend and showroom roster loaded",
+    "Mugi handed over · " + yen.format(enquiry.sale.price) + " sale",
+    "Warehouse refreshed · One linked handover",
+    "One handover updates all three reports",
+    forecast ? forecast.predicted + " expected visits · " + forecast.baseline + " booking baseline" : "",
+  ];
+  const pathsByStep = [
+    [0, 1], [0, 1], [0], [1, 2], [2], [3],
+  ];
+  const showTraces = selected < completed && inspected === null;
+  const playLabel = playback === "playing" ? "Pause presentation"
+    : !remaining ? "Replay presentation"
+    : playback === "paused" ? "Resume presentation" : "Play presentation";
+
+  function connector(index: number, branches?: "two" | "three") {
+    const lit = showTraces && pathsByStep[selected].includes(index);
+    return (
+      <div className={styles.connector} data-branches={branches} data-lit={lit} aria-hidden="true">
+        {lit && <span className={styles.packet} key={selected + "-" + completed + "-" + runCount} />}
+      </div>
+    );
+  }
 
   return (
     <div className={styles.shell}>
@@ -187,7 +247,13 @@ export function DataPlatformDemo() {
           <p>Raw files come in → ELT links them to CRM records → reports show what happened → the forecast helps plan next week.</p>
           <p className={styles.dataNote}>Interactive simulation · Synthetic data · Runs in this browser</p>
         </div>
-        <div className={styles.workbench}>
+        <div className={styles.presentationControl}>
+          <button className={styles.playButton} type="button" onClick={togglePlayback}>
+            <span className={styles.playIcon} data-pausing={playback === "playing"} aria-hidden="true" />
+            {playLabel}
+          </button>
+        </div>
+        <div className={styles.workbench} data-playback={playback}>
           <section className={styles.actions} aria-labelledby="walkthrough-actions">
             <h2 id="walkthrough-actions">Demo actions</h2>
             <div className={styles.progress}>
@@ -195,8 +261,8 @@ export function DataPlatformDemo() {
               <progress id="demo-progress" value={completed} max={steps.length} />
             </div>
             <div className={styles.controls}>
-              {remaining ? <button className={styles.primary} type="button" onClick={advance}>{steps[completed].action}</button>
-                : <button className={styles.primary} type="button" onClick={reset}>Restart demo</button>}
+              {remaining ? <button className={styles.primary} type="button" onClick={() => { setPlayback("idle"); advance(); }}>{steps[completed].action}</button>
+                : <button className={styles.textButton} type="button" onClick={reset}>Restart demo</button>}
               {completed > 0 && remaining && <button className={styles.textButton} type="button" onClick={reset}>Reset</button>}
             </div>
             <p className={styles.linkedNodes}>Linked nodes · {activeStep.nodes.map(id => nodes[id].title).join(" · ")}</p>
@@ -204,7 +270,7 @@ export function DataPlatformDemo() {
               {steps.map((step, index) => (
                 <li key={step.title}>
                   <button type="button" className={styles.step} aria-current={selected === index ? "step" : undefined}
-                    onClick={() => { setSelected(index); setInspected(null); }}>
+                    onClick={() => { pauseForInspection(); setSelected(index); setInspected(null); }}>
                     <strong>{step.title}</strong>
                     <span>{index < completed ? "Done" : index === completed ? "Next" : "Preview"}</span>
                   </button>
@@ -222,20 +288,24 @@ export function DataPlatformDemo() {
               </dl>
             </div>
           </section>
-          <section className={styles.diagramPanel} aria-labelledby="architecture-heading">
+          <section ref={diagramPanel} className={styles.diagramPanel} aria-labelledby="architecture-heading">
             <div className={styles.diagramHeader}>
               <h2 id="architecture-heading">Carson’s diagram</h2>
               <p>Select a node to inspect its role.</p>
             </div>
+            <div className={styles.scene} aria-live="polite">
+              <span className={styles.sceneCounter}>{String(completed).padStart(2, "0")} / {String(steps.length).padStart(2, "0")}</span>
+              <strong key={completed} className={completed ? styles.sceneArrival : undefined}>{sceneNotes[completed]}</strong>
+            </div>
             <div className={styles.diagram} aria-label="Data platform architecture">
               <div className={styles.triple}>{node("apps")}{node("lake")}{node("external")}</div>
-              <div className={styles.connector} data-branches="three" aria-hidden="true" />
+              {connector(0, "three")}
               <div className={styles.double}>{node("events")}{node("agent")}</div>
-              <div className={styles.connector} data-branches="two" aria-hidden="true" />
+              {connector(1, "two")}
               <div className={styles.single}>{node("warehouse")}</div>
-              <div className={styles.connector} data-branches="three" aria-hidden="true" />
+              {connector(2, "three")}
               <div className={styles.triple}>{node("sales")}{node("marketing")}{node("operations")}</div>
-              <div className={styles.connector} aria-hidden="true" />
+              {connector(3)}
               <div className={styles.single}>{node("forecast")}</div>
             </div>
             <div className={styles.inspector} aria-live="polite">
@@ -268,7 +338,7 @@ export function DataPlatformDemo() {
                 </div>
               )}
             </div>
-            {snapshot && <button className={styles.textButton} type="button" onClick={() => { runElt(); setSelected(3); setInspected(null); }}>Rerun ELT</button>}
+            {snapshot && <button className={styles.textButton} type="button" onClick={() => { setPlayback("idle"); runElt(); setSelected(3); setInspected(null); }}>Rerun ELT</button>}
           </section>
         </div>
       </main>
