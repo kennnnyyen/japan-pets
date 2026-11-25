@@ -124,3 +124,19 @@
     white-space: nowrap;
   }
 }
+
+.expectation {
+  margin-top: 14px;
+  padding: 13px 14px;
+  border: 1px solid #cee9e1;
+  border-radius: 10px;
+  background: #edf7f4;
+  font-size: .875rem;
+  line-height: 1.45;
+}
+.expectation h3, .expectation dl, .expectation dd { margin: 0; }
+.expectation h3 { font-size: 1rem; }
+.expectation .expectationStep { margin: 2px 0 9px; color: var(--teal); font-weight: 650; }
+.expectation dt { font-weight: 700; }
+.expectation dd { color: #3b5664; }
+.expectation dd + dt { margin-top: 8px; }

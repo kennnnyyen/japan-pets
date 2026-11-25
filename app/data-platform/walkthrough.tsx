@@ -19,13 +19,62 @@ const nodes = {
 
 type NodeId = keyof typeof nodes;
 
-const steps: { title: string; action: string; description: string; nodes: readonly NodeId[] }[] = [
-  { title: "Buyer enquiry", action: "Submit sample enquiry", description: "A buyer finds Mugi through a LINE campaign and registers interest.", nodes: ["apps", "warehouse"] },
-  { title: "Import source files", action: "Load sample files", description: "Stage the campaign spend and Tokyo showroom roster.", nodes: ["lake", "warehouse"] },
-  { title: "Viewing and handover", action: "Record sample handover", description: "Record qualification, the viewing, the in-person explanation and the completed sale.", nodes: ["apps", "events"] },
-  { title: "Warehouse refresh", action: "Run sample ELT", description: "Link the enquiry, sale, animal and site, then rebuild the reports.", nodes: ["lake", "agent", "warehouse"] },
-  { title: "Trace the reports", action: "Show the three marts", description: "Check how the same handover changes Sales, Marketing and Operations.", nodes: ["warehouse", "sales", "marketing", "operations"] },
-  { title: "Viewing forecast", action: "Run sample forecast", description: "Estimate next week’s showroom attendance and compare it with a booking-based baseline.", nodes: ["forecast", "warehouse", "apps"] },
+const steps: {
+  title: string;
+  action: string;
+  description: string;
+  teamView: string;
+  businessUse: string;
+  nodes: readonly NodeId[];
+}[] = [
+  {
+    title: "Buyer enquiry",
+    action: "Submit sample enquiry",
+    description: "A buyer finds Mugi through a LINE campaign and registers interest.",
+    teamView: "Sales sees which animal the buyer asked about and how they found the shop. If the source is missing, the enquiry is marked unattributed.",
+    businessUse: "Staff can follow up from one queue and see which enquiries still need a viewing booked.",
+    nodes: ["apps", "warehouse"],
+  },
+  {
+    title: "Import source files",
+    action: "Load sample files",
+    description: "Stage the campaign spend and Tokyo showroom roster.",
+    teamView: "Marketing supplies spend by campaign and period. Operations supplies roster hours by site and week. This demo loads one sample record from each.",
+    businessUse: "Use spend to compare acquisition costs and roster hours to spot coverage gaps. In the pilot, the team would review unmatched campaign or site records before using the totals.",
+    nodes: ["lake", "warehouse"],
+  },
+  {
+    title: "Viewing and handover",
+    action: "Record sample handover",
+    description: "Record qualification, the viewing, the in-person explanation and the completed sale.",
+    teamView: "Showroom staff record the viewing, the in-person explanation and the actual handover. The completed sale links to the original enquiry and animal.",
+    businessUse: "See who is still considering a purchase, which animals have been handed over, and when each sale was completed.",
+    nodes: ["apps", "events"],
+  },
+  {
+    title: "Warehouse refresh",
+    action: "Run sample ELT",
+    description: "Link the enquiry, sale, animal and site, then rebuild the reports.",
+    teamView: "The refresh shows how many records it loaded and which handover it linked. Run it twice and the sale still counts once.",
+    businessUse: "Use one set of linked records for the weekly review. In the pilot, a failed refresh would leave the last successful report available and flag it as stale.",
+    nodes: ["lake", "agent", "warehouse"],
+  },
+  {
+    title: "Trace the reports",
+    action: "Show the three marts",
+    description: "Check how the same handover changes Sales, Marketing and Operations.",
+    teamView: "Sales sees revenue and contribution after direct costs. Marketing credits the tracked campaign. Operations sees one fewer animal available for sale.",
+    businessUse: "Compare sales routes, decide where to spend the next marketing yen, and plan available stock by site using the same underlying handover.",
+    nodes: ["warehouse", "sales", "marketing", "operations"],
+  },
+  {
+    title: "Viewing forecast",
+    action: "Run sample forecast",
+    description: "Estimate next week’s showroom attendance and compare it with a booking-based baseline.",
+    teamView: "The manager sees expected attendance for the next seven days alongside the estimate based on current bookings. A live pilot needs attendance, cancellation and no-show records.",
+    businessUse: "Set aside enough showroom time for viewings. Use the model only if it improves on the booking estimate when checked against real attendance.",
+    nodes: ["forecast", "warehouse", "apps"],
+  },
 ];
 
 const inventory = [{ id: "AN-088", site: "tokyo", status: "Available" }];
@@ -162,6 +211,16 @@ export function DataPlatformDemo() {
                 </li>
               ))}
             </ol>
+            <div className={styles.expectation} aria-live="polite" aria-atomic="true">
+              <h3>What to expect</h3>
+              <p className={styles.expectationStep}>{activeStep.title}</p>
+              <dl>
+                <dt>What the team sees</dt>
+                <dd>{activeStep.teamView}</dd>
+                <dt>How the business uses it</dt>
+                <dd>{activeStep.businessUse}</dd>
+              </dl>
+            </div>
           </section>
           <section className={styles.diagramPanel} aria-labelledby="architecture-heading">
             <div className={styles.diagramHeader}>
@@ -196,7 +255,7 @@ export function DataPlatformDemo() {
               )}
               {snapshot && completed >= 5 && (
                 <dl className={styles.metrics}>
-                  <div><dt>Sales mart</dt><dd>+{directSales} handover</dd><small>{yen.format(snapshot.sales[0].revenue - before.sales[0].revenue)} in revenue</small></div>
+                  <div><dt>Sales mart</dt><dd>+{directSales} handover</dd><small>{yen.format(snapshot.sales[0].revenue - before.sales[0].revenue)} revenue · {yen.format(snapshot.sales[0].contribution - before.sales[0].contribution)} contribution</small></div>
                   <div><dt>Marketing mart</dt><dd>+{lineSales} LINE handover</dd><small>Attributed to the enquiry’s source</small></div>
                   <div><dt>Operations mart</dt><dd>{snapshot.operations[0].ready - before.operations[0].ready} sale-ready animal</dd><small>Mugi removed from available stock</small></div>
                 </dl>
