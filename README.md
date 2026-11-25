@@ -11,6 +11,7 @@ The animal portraits are original AI-generated demo assets and do not depict ani
 - `/portal` — buyer and owner portal for pet discovery, interest registration and care requests
 - `/crm` — admin CRM for sales, animal inventory, owners and service requests
 - `/crm#reports` — ELT demo with sales, marketing and operations marts, expansion scenarios and a monthly CSV export
+- `/data-platform` — architecture walkthrough showing demo actions next to the related pipeline nodes
 
 ## Analytics demo
 

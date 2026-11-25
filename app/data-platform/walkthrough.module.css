@@ -1,0 +1,126 @@
+.shell {
+  --navy: #112b3e;
+  --teal: #146e64;
+  --mint: #acf3da;
+  --paper: #f1f7f6;
+  --line: #d5e3e2;
+  min-height: 100svh;
+  background: var(--paper);
+  color: var(--navy);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.shell :is(button, a):focus-visible {
+  outline: 3px solid #178779;
+  outline-offset: 3px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding: 16px max(20px, calc((100vw - 1180px) / 2));
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+
+.header nav { display: flex; gap: 20px; flex-wrap: wrap; }
+.header a { color: var(--navy); text-decoration: none; font-size: .875rem; }
+.header a:hover { text-decoration: underline; }
+.header .brand { font-size: 1rem; font-weight: 750; }
+
+.main { max-width: 1180px; margin: 0 auto; padding: clamp(24px, 4vw, 48px) 20px 40px; }
+.intro { max-width: 710px; margin-bottom: 22px; }
+.intro h1 { margin: 0 0 8px; font-size: clamp(2.15rem, 4vw, 3.5rem); line-height: 1.05; letter-spacing: -.045em; }
+.intro p { margin: 0; line-height: 1.5; color: #3b5664; }
+.intro .dataNote { margin-top: 10px; font-size: .875rem; font-weight: 650; color: var(--teal); }
+
+.workbench { display: grid; grid-template-columns: minmax(260px, 1fr) minmax(0, 1.7fr); gap: 16px; align-items: stretch; }
+.actions, .diagramPanel, .results { border: 1px solid var(--line); border-radius: 18px; padding: clamp(14px, 2vw, 22px); min-width: 0; }
+.actions, .results { background: #fff; }
+.workbench h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -.015em; }
+.progress { display: grid; gap: 5px; color: #3b5664; font-size: .875rem; }
+.progress progress { accent-color: var(--teal); width: 100%; }
+.controls { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.primary, .textButton { font: inherit; cursor: pointer; font-size: .875rem; font-weight: 700; min-height: 40px; padding: 7px 12px; border-radius: 8px; }
+.primary { color: #fff; background: var(--teal); border: 1px solid var(--teal); }
+.primary:hover { background: #10584f; }
+.textButton { color: var(--teal); border: 1px solid #b9d7d2; background: #fff; }
+.textButton:hover { background: #ecf7f4; }
+
+.steps { margin: 0; padding-left: 23px; }
+.steps li { margin-bottom: 5px; padding-left: 1px; }
+.steps li::marker { color: var(--teal); font-size: .875rem; font-weight: 750; }
+.step { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 42px; background: #fff; color: var(--navy); border: 1px solid transparent; border-radius: 8px; text-align: left; font: inherit; font-size: .875rem; padding: 7px 9px; cursor: pointer; }
+.step:hover { background: #f2f8f7; }
+.step[aria-current] { background: #e5f6f0; border-color: #abddd0; }
+.step span { color: #48616f; font-size: .8125rem; }
+
+.diagramPanel { color: #f6fbff; background: #132a3d; border-color: #233f54; }
+.diagramPanel :is(button, a):focus-visible { outline-color: var(--mint); }
+.diagramHeader { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 10px; padding-bottom: 14px; }
+.diagramHeader h2, .diagramHeader p { margin: 0; }
+.diagramHeader p { color: #bfcedb; font-size: .875rem; }
+.diagram { display: grid; }
+.triple, .double, .single { display: grid; align-items: stretch; gap: 7px; }
+.triple { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.double { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.single { grid-template-columns: minmax(0, 270px); justify-content: center; }
+.connector { min-height: 15px; background: linear-gradient(#608398, #608398) center / 1px 100% no-repeat; }
+
+.node { min-width: 0; min-height: 58px; padding: 7px; display: grid; align-content: center; justify-items: center; gap: 3px; text-align: center; color: #ecf6fa; background: #1c374b; border: 1px solid #466377; border-radius: 9px; font: inherit; cursor: pointer; }
+.node strong { font-size: .925rem; line-height: 1.16; }
+.node span { font-size: .8125rem; line-height: 1.25; color: #c1d1dd; }
+.node:hover, .node[aria-pressed="true"] { background: #2b4a60; }
+.node[data-active="true"] { border-color: #81debf; background: #174d48; box-shadow: inset 0 0 0 1px #81debf; }
+.node[data-active="true"] span { color: #c9f9eb; }
+.node[data-future="true"] { border-style: dashed; }
+
+.inspector { min-height: 65px; margin-top: 12px; padding-top: 10px; border-top: 1px solid #466377; }
+.inspector strong { font-size: .9rem; color: var(--mint); }
+.inspector p { margin: 3px 0 0; color: #deebf5; font-size: .875rem; line-height: 1.45; }
+.results { grid-column: 1 / -1; }
+.results p { margin: 6px 0; color: #3b5664; line-height: 1.45; }
+.results .textButton { margin-top: 10px; }
+.metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin: 10px 0; }
+.metrics div, .forecast { background: #edf7f4; border: 1px solid #cee9e1; border-radius: 10px; padding: 10px 12px; }
+.metrics dt, .forecast h3 { font-size: .9rem; font-weight: 700; margin: 0 0 4px; }
+.metrics dd { font-weight: 750; margin: 0 0 3px; color: var(--teal); }
+.results small { color: #3b5664; font-size: .8125rem; }
+
+@media (max-width: 690px) {
+  .workbench { grid-template-columns: 1fr; }
+  .header { padding-inline: 20px; }
+}
+@media (max-width: 440px) {
+  .metrics { grid-template-columns: 1fr; }
+  .node strong { font-size: .8125rem; }
+  .node span { font-size: .75rem; }
+}
+
+:global(body):has(.shell) { margin: 0; }
+.shell, .shell :is(section, div, button) { box-sizing: border-box; }
+.connector[data-branches] {
+  position: relative;
+}
+.connector[data-branches]::before {
+  content: "";
+  position: absolute;
+  inset: 50% 16.5% auto;
+  border-top: 1px solid #608398;
+}
+.connector[data-branches="two"]::before { inset-inline: 25%; }
+
+.linkedNodes { color: #3b5664; font-size: .8125rem; margin: 0 0 8px; }
+@media (min-width: 691px) {
+  .linkedNodes {
+    position: absolute;
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}

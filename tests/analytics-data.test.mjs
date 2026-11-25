@@ -61,3 +61,12 @@ test("the scenario applies capacity, delay and upfront spending", () => {
   assert.ok(delayed.cash < build.cash);
   assert.equal(compareExpansion({ ...assumptions, startingCash: 0 })[0].firstShortfall, 0);
 });
+
+test("a sample import is loaded without mixing its spend into the historical reporting period", () => {
+  const before = refreshWarehouse([], []);
+  const after = refreshWarehouse([], [], {
+    additionalSpend: [{ month: "2026-11", channel: "line", amount: 120000 }],
+  });
+  assert.equal(after.loadedRows, before.loadedRows + 1);
+  assert.deepEqual(after.marketing, before.marketing);
+});

@@ -79,12 +79,16 @@ function monthOf(date) {
   return parts.find(part => part.type === "year").value + "-" + parts.find(part => part.type === "month").value;
 }
 
-export function refreshWarehouse(enquiries, inventory) {
+/**
+ * @param {{ additionalSpend?: typeof campaignSpend, siteRecords?: typeof sites }} [sources]
+ */
+export function refreshWarehouse(enquiries, inventory, sources) {
+  const { additionalSpend = [], siteRecords = sites } = sources ?? {};
   const warehouse = {
     enquiries: [...historicalEnquiries, ...enquiries],
-    campaignSpend,
+    campaignSpend: [...campaignSpend, ...additionalSpend],
     inventory,
-    sites,
+    sites: siteRecords,
   };
   const deals = warehouse.enquiries.filter(enquiry => enquiry.sale);
   const placedAnimals = new Set(deals.map(deal => deal.animalId));
@@ -99,7 +103,8 @@ export function refreshWarehouse(enquiries, inventory) {
   const marketing = channels.map(channel => {
     const leads = warehouse.enquiries.filter(enquiry => enquiry.channel === channel.id);
     const spend = channel.spend === null ? null : warehouse.campaignSpend
-      .filter(record => record.channel === channel.id).reduce((total, record) => total + record.amount, 0);
+      .filter(record => record.channel === channel.id && historicalMonths.includes(record.month))
+      .reduce((total, record) => total + record.amount, 0);
     const historicalSales = historicalEnquiries.filter(enquiry => enquiry.channel === channel.id && enquiry.sale).length;
     return {
       channel: channel.name, spend, enquiries: leads.length,
@@ -125,7 +130,7 @@ export function refreshWarehouse(enquiries, inventory) {
   const months = [...new Set([...historicalMonths, ...warehouse.enquiries.flatMap(
     enquiry => enquiry.events.map(monthOf)
   )])].sort();
-  const monthlyActivity = months.flatMap(month => sites.map(site => {
+  const monthlyActivity = months.flatMap(month => warehouse.sites.map(site => {
     const records = warehouse.enquiries.filter(enquiry => enquiry.site === site.id);
     return {
       month, site: site.id,
@@ -139,7 +144,7 @@ export function refreshWarehouse(enquiries, inventory) {
     funnel: stages.map((stage, index) => ({
       stage, count: warehouse.enquiries.filter(enquiry => enquiry.events.length > index).length,
     })),
-    loadedRows: warehouse.enquiries.length + warehouse.campaignSpend.length + inventory.length + sites.length,
+    loadedRows: warehouse.enquiries.length + warehouse.campaignSpend.length + inventory.length + warehouse.sites.length,
   };
 }
 
