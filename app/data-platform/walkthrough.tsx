@@ -6,7 +6,7 @@ import styles from "./walkthrough.module.css";
 
 const nodes = {
   apps: { title: "Business Apps", caption: "Owner portal · Admin CRM", detail: "The portal captures interest. Staff record the viewing, explanation and handover in the CRM." },
-  lake: { title: "Data Lake", caption: "Raw imports", detail: "The POC stages sample campaign spend and roster files. In a pilot, the raw records can live in a separate Supabase schema." },
+  lake: { title: "Raw imports (Data Lake)", caption: "Campaign and roster files", detail: "This is where original campaign and roster files would be kept so the team can process them again. The demo uses sample records." },
   external: { title: "External APIs", caption: "Future connections", detail: "LINE, point of sale and advertising APIs can supply source records after the pilot." },
   events: { title: "Real-time Data", caption: "Operational events", detail: "The handover changes the operational record immediately. Reports reflect it once the warehouse refreshes." },
   agent: { title: "Data Agent", caption: "ELT run & checks", detail: "The workflow reads source records, loads the warehouse and transforms them into reporting marts. This node represents a controlled job with a run log." },
@@ -184,7 +184,7 @@ export function DataPlatformDemo() {
       <main className={styles.main}>
         <div className={styles.intro}>
           <h1>Data Platform Demo</h1>
-          <p>Walk one Tokyo showroom enquiry through Carson’s diagram, from the first contact to reporting and a viewing forecast.</p>
+          <p>Raw files come in → ELT links them to CRM records → reports show what happened → the forecast helps plan next week.</p>
           <p className={styles.dataNote}>Interactive simulation · Synthetic data · Runs in this browser</p>
         </div>
         <div className={styles.workbench}>
